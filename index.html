@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STILL / RANDOM — Live Movie Discovery</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="logo" href="#">STILL<span>/</span>RANDOM</a>
+  <div class="top-actions">
+    <button id="settingsBtn" class="ghost-btn">⚙ API 설정</button>
+    <button id="savedBtn" class="ghost-btn">♡ 저장 <b id="savedCount">0</b></button>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <p class="eyebrow">LIVE MOVIE DISCOVERY</p>
+  <h1>오늘은 어떤<br><em>장면</em>을 발견할까?</h1>
+  <p>영화 데이터를 직접 저장하지 않고 인터넷에서 실시간으로 가져옵니다. TMDB의 영화 정보와 스틸 이미지로 무한에 가깝게 탐색하세요.</p>
+</section>
+
+<section class="filters">
+  <div class="mode-row">
+    <div>
+      <label>MODE</label>
+      <div class="chips" id="modeChips">
+        <button class="chip active" data-mode="random">🎲 완전 랜덤</button>
+        <button class="chip" data-mode="filter">🎯 조건 검색</button>
+      </div>
+    </div>
+    <div class="live-status"><span id="statusDot"></span><span id="statusText">연결 준비</span></div>
+  </div>
+
+  <div id="filterPanel" class="filter-panel hidden">
+    <div class="filter-group">
+      <label>GENRE</label>
+      <div class="chips" id="genreChips"></div>
+    </div>
+    <div class="filter-group">
+      <label>ERA</label>
+      <div class="chips" id="eraChips"></div>
+    </div>
+    <div class="filter-group">
+      <label>COLOR <small>실제 스틸컷 자동 분석</small></label>
+      <div class="chips" id="colorChips"></div>
+    </div>
+  </div>
+  <button id="randomBtn" class="random-btn">🎲 INTERNET RANDOM</button>
+</section>
+
+<section class="result" aria-live="polite">
+  <div class="still-wrap">
+    <div id="loading" class="loading"><div class="spinner"></div><span>영화와 스틸컷을 찾는 중...</span></div>
+    <img id="stillImage" alt="영화 스틸컷">
+    <button id="saveBtn" class="save-icon">♡</button>
+    <button id="nextBtn" class="next-btn">NEXT →</button>
+    <div class="image-label">TMDB STILL</div>
+  </div>
+  <article class="movie-info">
+    <div id="movieTags" class="movie-tags"></div>
+    <h2 id="movieTitle">준비 중...</h2>
+    <p id="movieMeta" class="meta"></p>
+    <p id="movieDescription" class="description"></p>
+    <div class="details">
+      <div><span>DIRECTOR</span><strong id="movieDirector">—</strong></div>
+      <div><span>GENRE</span><strong id="movieGenre">—</strong></div>
+      <div><span>COLOR</span><strong id="movieColor">분석 중</strong></div>
+      <div><span>RATING</span><strong id="movieRating">—</strong></div>
+      <div><span>COUNTRY</span><strong id="movieCountry">—</strong></div>
+      <div><span>RUNTIME</span><strong id="movieRuntime">—</strong></div>
+    </div>
+    <a id="tmdbLink" class="tmdb-link" target="_blank" rel="noopener">TMDB에서 자세히 보기 ↗</a>
+  </article>
+</section>
+
+<section id="savedPanel" class="saved-panel hidden">
+  <div class="section-heading"><div><p class="eyebrow">YOUR COLLECTION</p><h2>저장한 영화</h2></div><button id="closeSaved" class="ghost-btn">닫기 ×</button></div>
+  <div id="savedGrid" class="saved-grid"></div>
+  <p id="emptySaved" class="empty">아직 저장한 영화가 없습니다.</p>
+</section>
+
+<section class="about">
+  <p class="eyebrow">ABOUT THE DATA</p>
+  <p>Movie information and images are supplied by <b>The Movie Database (TMDB)</b>. This site is not endorsed or certified by TMDB.</p>
+</section>
+</main>
+
+<div id="settingsModal" class="modal hidden">
+  <div class="modal-box">
+    <button id="closeSettings" class="modal-close">×</button>
+    <p class="eyebrow">TMDB API</p>
+    <h2>인터넷 영화 데이터 연결</h2>
+    <p>TMDB의 <b>API Read Access Token</b>을 입력하면 브라우저에서 실시간 영화 정보와 이미지를 가져옵니다. 토큰은 이 브라우저의 localStorage에만 저장됩니다.</p>
+    <input id="tokenInput" type="password" placeholder="eyJhbGciOiJIUzI1NiJ9..." autocomplete="off">
+    <label class="check"><input id="rememberToken" type="checkbox" checked> 이 브라우저에 토큰 저장</label>
+    <button id="connectBtn" class="random-btn">TMDB 연결하기</button>
+    <p class="help">TMDB 계정 → Settings → API → API Read Access Token에서 발급할 수 있습니다.</p>
+  </div>
+</div>
+
+<footer>STILL / RANDOM · Live movie discovery · Data & images by TMDB</footer>
+<script src="script.js"></script>
+</body>
+</html>
